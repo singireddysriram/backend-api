@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const protect = require('../middleware/authMiddleware');
 
 const { createStudent, ReadStudent, updateStudent, deleteStudent } = require('../controllers/studentController');
 
 router.post("/students",createStudent);
 
-router.get("/students",ReadStudent);
+router.get("/students",protect,ReadStudent);
 
 router.put("/students/:id", updateStudent);
 
