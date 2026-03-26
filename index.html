@@ -3,9 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Async Await Example</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+
+<script>
+
+// Reusable delay function
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Step 1
+async function step1() {
+    await delay(1000);
+    console.log("step 1 task is done");
+
+    let process = true;
+
+    if (!process) {
+        throw "stopped after the task1";
+    }
+}
+
+// Step 2
+async function step2() {
+    await delay(1000);
+    console.log("step 2 task is done");
+
+    let process = false; // This will cause error
+
+    if (!process) {
+        throw "stopped after the task2";
+    }
+}
+
+// Step 3
+async function step3() {
+    await delay(1000);
+    console.log("step 3 task is done");
+
+    let process = true;
+
+    if (!process) {
+        throw "stopped after the task3";
+    }
+}
+
+// Main execution function
+async function runSteps() {
+    try {
+        await step1();
+        await step2(); // stops here due to error
+        await step3();
+
+        console.log("all done....");
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// Call function
+runSteps();
+
+</script>
+
 </body>
-</html>
+</html> 
